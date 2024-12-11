@@ -30,14 +30,8 @@ if (isset($_GET['add']) && filter_var($_GET['add'], FILTER_VALIDATE_INT)) {
 
         $insert_stmt = $conn->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)");
         $insert_stmt->bind_param("iii", $user_id, $product_id, $quantity);
+        $insert_stmt->execute();
 
-        if ($insert_stmt->execute()) {
-            echo "<p>Product added to the cart successfully!</p>";
-        } else {
-            echo "<p>Error adding product to the cart. Please try again.</p>";
-        }
-    } else {
-        echo "<p>User not found. Please log in again.</p>";
     }
 
     if (isset($_SESSION['cart'][$product_id])) {
@@ -65,12 +59,8 @@ if (isset($_GET['remove']) && filter_var($_GET['remove'], FILTER_VALIDATE_INT)) 
         // Delete product from the cart table in the database
         $delete_stmt = $conn->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
         $delete_stmt->bind_param("ii", $user_id, $product_id);
+        $delete_stmt->execute();
 
-        if ($delete_stmt->execute()) {
-            echo "<p>Product removed from the cart successfully!</p>";
-        } else {
-            echo "<p>Error removing product from the cart. Please try again.</p>";
-        }
     }
 
     // Remove product from the session cart array
@@ -123,47 +113,45 @@ foreach ($cart_products as $product) {
 </head>
 
 <body>
-
     <?php require './php/header.php'; ?>
-
     <main>
         <h1 class="shop-title">Your Cart</h1>
-
-        <table class="product-table">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php if (count($cart_products) > 0): ?>
-                    <?php foreach ($cart_products as $product): ?>
-                        <tr>
-                            <td>
-                                <img src="<?php echo htmlspecialchars($imageBaseURL . $product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
-                            </td>
-                            <td><?php echo htmlspecialchars($product['name']); ?></td>
-                            <td>₱<?php echo number_format($product['price'], 2); ?></td>
-                            <td><?php echo $_SESSION['cart'][$product['product_id']]; ?></td>
-                            <td>₱<?php echo number_format($product['price'] * $_SESSION['cart'][$product['product_id']], 2); ?></td>
-                            <td>
-                                <a href="cart.php?remove=<?php echo $product['product_id']; ?>" class="remove-btn">Remove</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
+        <div class="table-container">
+            <table class="product-table">
+                <thead>
                     <tr>
-                        <td colspan="6" class="empty-cart-message">Your cart is empty. Start shopping now!</td>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php if (count($cart_products) > 0): ?>
+                        <?php foreach ($cart_products as $product): ?>
+                            <tr>
+                                <td>
+                                    <img src="<?php echo htmlspecialchars($imageBaseURL . $product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
+                                </td>
+                                <td><?php echo htmlspecialchars($product['name']); ?></td>
+                                <td>₱<?php echo number_format($product['price'], 2); ?></td>
+                                <td><?php echo $_SESSION['cart'][$product['product_id']]; ?></td>
+                                <td>₱<?php echo number_format($product['price'] * $_SESSION['cart'][$product['product_id']], 2); ?></td>
+                                <td>
+                                    <a href="cart.php?remove=<?php echo $product['product_id']; ?>" class="remove-btn">Remove</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" class="empty-cart-message">Your cart is empty. Start shopping now!</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
         <?php if (count($cart_products) > 0): ?>
             <div class="cart-summary">
