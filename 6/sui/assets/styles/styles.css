@@ -1,0 +1,374 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: rgb(13, 13, 13);
+    background: radial-gradient(circle, rgba(13, 13, 13, 1) 0%, rgba(62, 29, 43, 1) 28%, rgba(13, 13, 13, 1) 100%);
+}
+
+a {
+    text-decoration: none;
+}
+
+manage-products h1,
+manage-products h2 {
+    color: white;
+}
+
+
+.hero {
+    height: 100vh;
+    padding: 200px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero__heading {
+    font-size: clamp(var(--font-size-xxlarge), 5vw, var(--font-size-xxxxlarge));
+    font-weight: var(--font-weight-bold);
+    padding-bottom: var(--space-medium);
+    color: #fff;
+}
+
+.hero__heading span {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero__description {
+    font-size: clamp(var(--font-size-base), 3vw, var(--font-size-large));
+    font-weight: var(--font-weight-light);
+    padding-bottom: var(--space-xxlarge);
+    letter-spacing: 0.5px;
+    color: rgb(255, 255, 255, 0.5);
+}
+
+.hero__button {
+    font-size: var(--font-size-xlarge);
+    /* Button font size */
+    font-weight: var(--font-weight-normal);
+    /* Normal font weight */
+    background-image: var(--gradient);
+    /* Gradient background */
+    padding: var(--space-medium) var(--space-xxlarge);
+    /* Button padding */
+    border: none;
+    /* Remove border */
+    border-radius: 64px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Change cursor to pointer */
+    position: relative;
+    /* Positioning context */
+    transition: all 0.35s;
+    /* Smooth transition for hover effects */
+    outline: none;
+    /* Remove outline */
+}
+
+.hero__button a {
+    position: relative;
+    /* Positioning context for link inside button */
+    color: #fff;
+    /* White text color */
+    text-decoration: none;
+    /* Remove underline from link */
+}
+
+.hero__button:hover {
+    opacity: 0.8;
+    /* Slightly fade on hover */
+    transform: scale(1.03);
+    /* Slightly enlarge on hover */
+}
+
+
+/* About Section */
+
+#about {
+    scroll-margin-top: 12rem;
+}
+
+.main-section {
+    height: 60vh;
+    padding: var(--space-xxlarge);
+}
+
+.main__container {
+    display: flex;
+    /* Use flexbox layout */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: center;
+    /* Center items horizontally */
+    width: 100%;
+    /* Full width */
+    height: 80%;
+    /* 80% of the main section height */
+    gap: var(--space-large);
+    /* Space between items */
+    padding: var(--space-large);
+    /* Padding for the container */
+    border: var(--border);
+    /* Border styling */
+    border-radius: 64px;
+    /* Rounded corners */
+}
+
+.main__img--container {
+    flex: 4;
+    /* Take 4 parts of the available space */
+    height: 100%;
+    /* Full height */
+}
+
+.main__img--container img {
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    object-fit: cover;
+    /* Cover the container */
+    border-radius: 48px;
+    /* Rounded corners */
+    border: 1px solid rgb(255, 255, 255, 0.2);
+    /* Light border */
+    opacity: 0.85;
+    /* Slightly transparent */
+}
+
+.main__content {
+    flex: 3;
+    /* Take 3 parts of the available space */
+    display: flex;
+    /* Use flexbox layout */
+    flex-direction: column;
+    /* Arrange children in a column */
+    color: white;
+    /* White text color */
+    height: 100%;
+    /* Full height */
+    width: 200px;
+    /* Fixed width */
+    padding: var(--space-xlarge);
+    /* Padding for content */
+    border: var(--border);
+    /* Border styling */
+    border-radius: 48px;
+    /* Rounded corners */
+    line-height: 1.2;
+    /* Line height */
+}
+
+.main__content h1 {
+    font-size: clamp(var(--font-size-xlarge), 5vw, var(--font-size-xxlarge));
+    /* Responsive font size */
+    font-weight: var(--font-weight-bold);
+    /* Bold font weight */
+    padding-bottom: var(--space-medium);
+    /* Bottom padding */
+    color: #fff;
+    /* White text color */
+}
+
+.main__content h1 span {
+    background: var(--gradient);
+    /* Gradient background for the text */
+    -webkit-background-clip: text;
+    /* Clip background to text (for WebKit browsers) */
+    -webkit-text-fill-color: transparent;
+    /* Make text color transparent */
+    background-clip: text;
+    /* Clip background to text */
+}
+
+.main__content h2 {
+    font-size: clamp(var(--font-size-medium), 5vw, var(--font-size-large));
+    /* Responsive font size */
+    font-weight: var(--font-weight-light);
+    /* Light font weight */
+    letter-spacing: 0.5px;
+    /* Spacing between letters */
+    color: rgb(255, 255, 255, 0.8);
+    /* Slightly transparent white color */
+}
+
+.services {
+    display: flex;
+    /* Use flexbox layout */
+    flex-direction: column;
+    /* Arrange children in a column */
+    justify-content: center;
+    /* Center items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    height: 100%;
+    /* Full height of the parent container */
+    padding: 10rem 0;
+    /* Vertical padding */
+}
+
+.services h1 {
+    background: var(--gradient);
+    /* Gradient background for the heading */
+    -webkit-background-clip: text;
+    /* Clip the gradient to the text (for WebKit browsers) */
+    -webkit-text-fill-color: transparent;
+    /* Make text color transparent */
+    background-clip: text;
+    /* Clip the background to the text */
+    margin-bottom: 3rem;
+    /* Bottom margin */
+    font-size: var(--font-size-xxxlarge);
+    /* Font size for the heading */
+}
+
+.services__wrapper {
+    display: flex;
+    /* Use flexbox layout */
+    flex-wrap: wrap;
+    /* Allow items to wrap onto the next line */
+    gap: var(--space-large);
+    /* Space between items */
+    padding: var(--space-xxlarge);
+    /* Padding for the wrapper */
+}
+
+.services__card {
+    width: calc(25% - var(--space-large));
+    /* Set width of each card with a gap adjustment */
+    display: flex;
+    /* Use flexbox layout */
+    flex-direction: column;
+    /* Arrange children in a column */
+    justify-content: center;
+    /* Center items vertically */
+    padding: var(--space-xxxlarge) var(--space-xxlarge);
+    /* Padding inside the card */
+    color: #fff;
+    /* White text color */
+    transition: 150ms ease-in;
+    /* Transition for hover effects */
+    border: var(--border);
+    /* Border styling */
+    border-radius: 32px;
+    /* Rounded corners */
+    gap: var(--space-medium);
+    /* Space between elements inside the card */
+}
+
+.services__card:hover {
+    transform: scale(1.015);
+    /* Slightly enlarge on hover */
+    cursor: pointer;
+    /* Change cursor to pointer */
+    background-color: rgb(255, 255, 255, 0.05);
+    /* Light transparent background on hover */
+    backdrop-filter: blur(15px);
+    /* Blur background behind the card */
+}
+
+.services__card h2 {
+    font-size: clamp(var(--font-size-xlarge), 3vw, var(--font-size-xxxlarge));
+    /* Responsive font size */
+    font-weight: var(--font-weight-bold);
+    /* Bold font weight */
+}
+
+.services__card p {
+    margin-top: 24px;
+    /* Top margin */
+    font-size: clamp(var(--font-size-base), 3vw, var(--font-size-medium));
+    /* Responsive font size */
+    line-height: 3rem;
+    /* Line height */
+    margin-bottom: 2rem;
+    /* Bottom margin */
+}
+
+.services__btn {
+    margin-top: auto;
+    /* Push the button to the bottom of the card */
+}
+
+.services__card button {
+    color: #fff;
+    /* White text color for the button */
+    background-color: transparent;
+    /* Transparent background */
+    padding: 14px 24px;
+    /* Padding for the button */
+    border: 1px solid rgb(255, 255, 255, 0.5);
+    /* Light border */
+    border-radius: 64px;
+    /* Rounded corners for the button */
+    font-size: 1rem;
+    /* Font size for the button */
+}
+
+.services__card button a {
+    text-decoration: none;
+    /* Remove underline from link */
+    color: white;
+    /* White text color for the link */
+}
+
+.services__card button:hover {
+    cursor: pointer;
+    /* Change cursor to pointer */
+    background-color: rgb(255, 255, 255, 0.1);
+    /* Light background on hover */
+}
+
+@media screen and (max-width: 1300px) {
+    .services__card {
+        padding: var(--space-xxlarge) var(--space-xlarge);
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .main-section {
+        height: 80vh;
+        padding: var(--space-xlarge);
+    }
+    .main__container {
+        flex-direction: column;
+        height: 100%;
+    }
+    .main__img--container {
+        width: 100%;
+        height: 40%;
+    }
+    .main__content {
+        width: 100%;
+    }
+    .services__card {
+        width: calc(50% - var(--space-large));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero__heading {
+        font-size: var(--font-size-xlarge);
+    }
+    .hero__description {
+        font-size: var(--font-size-base);
+    }
+}

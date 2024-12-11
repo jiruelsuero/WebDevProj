@@ -1,0 +1,227 @@
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    /* Ensures padding and border are included in the element's width and height */
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    /* Sets the default font for the entire document */
+    scroll-behavior: smooth;
+    /* Enables smooth scrolling */
+}
+
+
+/* Body Styling */
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* Makes the body a flex container, arranging items in a column */
+    background: rgb(13, 13, 13);
+    /* Fallback background color */
+    background: radial-gradient(circle at bottom right, rgba(13, 13, 13, 1) 0%, rgba(62, 29, 43, 1) 28%, rgba(13, 13, 13, 1) 100%);
+    /* Radial gradient background with dark colors, starting from black to deep red */
+}
+
+
+/* Form Layout */
+
+form {
+    display: flex;
+    flex-direction: column;
+    /* Stacks form fields vertically */
+    padding: 0;
+    margin: 0;
+    gap: 1rem;
+    /* Adds space between form elements */
+}
+
+
+/* Container to Center Form */
+
+.container {
+    display: flex;
+    justify-content: center;
+    /* Centers form horizontally */
+    align-items: center;
+    /* Centers form vertically */
+    min-height: 100vh;
+    /* Container takes full viewport height */
+    color: black;
+    /* Default text color */
+    padding: 20px;
+    /* Adds space around the form */
+}
+
+
+/* Form Wrapper */
+
+.wrapper {
+    width: 420px;
+    /* Sets the form width */
+    background: transparent;
+    /* Makes the form background transparent */
+    border: var(--border);
+    /* Uses custom CSS variable for border */
+    backdrop-filter: blur(9px);
+    /* Adds a blurred background effect */
+    color: #fff;
+    /* White text color */
+    border-radius: 12px;
+    /* Rounds the form corners */
+    padding: 30px 40px;
+    /* Adds padding inside the form */
+}
+
+
+/* Form Heading */
+
+.wrapper h1 {
+    font-size: var(--font-size-xxlarge);
+    /* Uses custom font size variable */
+    text-align: left;
+    /* Aligns text to the left */
+    margin-bottom: 1rem;
+    /* Adds space below the heading */
+}
+
+
+/* Input Box Styling */
+
+.wrapper .input-box {
+    position: relative;
+    /* Allows for positioning child elements inside */
+    width: 100%;
+    /* Input box takes full width */
+    height: 50px;
+    /* Fixed height for input fields */
+    margin-block-end: 0.5rem;
+    /* Adds space after the input field */
+}
+
+
+/* Input Field */
+
+.input-box input {
+    width: 100%;
+    /* Input takes full width of container */
+    height: 100%;
+    /* Input height is equal to parent container */
+    background: transparent;
+    /* Transparent background */
+    border: none;
+    /* Removes default borders */
+    outline: none;
+    /* Removes focus outline */
+    border: var(--border);
+    /* Custom border variable */
+    border-radius: 40px;
+    /* Rounds the corners of the input field */
+    font-size: 16px;
+    /* Sets font size */
+    color: #fff;
+    /* White text color */
+    padding: 20px 45px 20px 20px;
+    /* Padding around the text, with extra space on the right for icons */
+}
+
+
+/* Placeholder Styling */
+
+.input-box input::placeholder {
+    color: rgb(255, 255, 255, 0.2);
+    /* Makes placeholder text semi-transparent */
+}
+
+
+/* Focus State for Input */
+
+.input-box input:focus {
+    border: 1px solid white;
+    /* Adds a white border when input is focused */
+}
+
+
+/* Icon inside Input */
+
+.input-box i {
+    position: absolute;
+    /* Positions icon inside input box */
+    right: 20px;
+    /* Places icon to the right */
+    top: 30%;
+    /* Positions icon vertically */
+    transform: translate(-50%);
+    /* Adjusts icon position slightly */
+    font-size: 20px;
+    /* Sets icon size */
+}
+
+
+/* Remember Me and Forgot Password Section *
+/* Submit Button Styling */
+
+.wrapper .btn {
+    width: 100%;
+    /* Button takes full width */
+    height: 45px;
+    /* Fixed height for the button */
+    background: rgb(black, grey, black);
+    /* Button background color (Note: not valid RGB, should be fixed) */
+    border: none;
+    /* Removes border */
+    outline: none;
+    /* Removes focus outline */
+    border-radius: 40px;
+    /* Rounds button corners */
+    box-shadow: 0 0 10px black;
+    /* Adds a shadow around the button */
+    cursor: pointer;
+    /* Changes cursor to pointer on hover */
+    font-size: 16px;
+    /* Sets font size */
+    color: #333;
+    /* Button text color */
+    font-weight: 600;
+    /* Makes text bold */
+    margin-top: 1.2rem;
+    /* Adds space above the button */
+}
+
+
+/* Register Link Section */
+
+.wrapper .register-link {
+    font-size: 14.5px;
+    /* Sets smaller font size */
+    text-align: center;
+    /* Centers the text */
+    margin-top: 0.5rem;
+    /* Adds space above the register link */
+}
+
+
+/* Register Link Styling */
+
+.register-link p a {
+    color: #fff;
+    /* White link color */
+    text-decoration: none;
+    /* Removes underline */
+    font-weight: 600;
+    /* Makes text bold */
+}
+
+
+/* Hover State for Register Link */
+
+.register-link p a:hover {
+    text-decoration: underline;
+    /* Adds underline on hover */
+}
+
+.login-link a {
+    text-decoration: none;
+}
+

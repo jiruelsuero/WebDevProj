@@ -1,0 +1,35 @@
+:root {
+  --border: 1px solid rgb(255, 255, 255, 0.2);
+  --gradient: linear-gradient(135deg, #926aff, 0%, #ff77b0, 50%, #ffb367 100%);
+
+  --space-xxsmall: 0.01rem;
+  --space-xsmall: 0.25rem;
+  --space-small: 0.5rem;
+  --space-small-medium: 0.75rem;
+  --space-medium: 1rem;
+  --space-medium-large: 1.25rem;
+  --space-large: 1.5rem;
+  --space-xlarge: 2rem;
+  --space-xxlarge: 3rem;
+  --space-xxxlarge: 5rem;
+
+  --font-size-xxsmall: 0.6rem;
+  --font-size-xsmall: 0.75rem;
+  --font-size-small: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-medium: 1.15rem;
+  --font-size-large: 1.25rem;
+  --font-size-xlarge: 1.5rem;
+  --font-size-xxlarge: 2rem;
+  --font-size-xxxlarge: 3rem;
+  --font-size-xxxxlarge: 4rem;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --color-black: #0d0d0d;
+  --color-dark-grey: #131313;
+}
