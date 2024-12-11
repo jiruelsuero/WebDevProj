@@ -24,7 +24,6 @@ if ($isAdmin && !isset($_SESSION['login_alert_shown'])) {
     $_SESSION['login_alert_shown'] = true;
 }
 
-echo '<script>var isAdmin = ' . ($isAdmin ? 'true' : 'false') . ';</script>';
 ?>
 
 

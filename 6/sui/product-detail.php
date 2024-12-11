@@ -5,9 +5,8 @@ require './db.php';  // Database connection
 $imageBaseURL = "./assets/images/"; 
 
 // Check if 'id' is provided in URL and is a valid integer
-if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
-    $product_id = intval($_GET['id']);
-
+if (isset($_GET['id'])) {
+    $product_id = $_GET['id'];
     // Fetch product details
     $stmt = $conn->prepare("SELECT * FROM products WHERE product_id = ?");
     if (!$stmt) {
@@ -23,7 +22,6 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
         exit;
     }
 
-    // Fetch related products
     $related_stmt = $conn->prepare("SELECT * FROM products WHERE category = ? AND product_id != ? LIMIT 4");
     if (!$related_stmt) {
         die("Query preparation failed: " . $conn->error);
@@ -32,7 +30,6 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     $related_stmt->execute();
     $related_products = $related_stmt->get_result();
 
-    // Fetch product reviews
     $review_stmt = $conn->prepare("SELECT * FROM reviews WHERE product_id = ?");
     if (!$review_stmt) {
         die("Query preparation failed: " . $conn->error);
@@ -41,7 +38,6 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     $review_stmt->execute();
     $reviews = $review_stmt->get_result();
 
-    // Handle review submission
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rating'], $_POST['comment'])) {
         if (isset($_SESSION['username'])) {
             $rating = intval($_POST['rating']);
@@ -71,6 +67,20 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     }
 } else {
     echo "Invalid product ID.";
+    exit;
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_review_id'])) {
+    $review_id = $_POST['delete_review_id'];
+    
+    $delete_stmt = $conn->prepare("DELETE FROM reviews WHERE review_id = ?");
+    if (!$delete_stmt) {
+        die("Query preparation failed: " . $conn->error);
+    }
+    
+    $delete_stmt->bind_param("i", $review_id);
+    $delete_stmt->execute();
+    header("Location: product-detail.php?id=" . $product_id);
     exit;
 }
 
@@ -169,11 +179,13 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
                         endfor; ?>
                     </div>
                     <p><?php echo htmlspecialchars($review['comment']); ?></p>
+                   
 
                     <!-- Delete button for admin -->
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                        <form method="POST" action="">
-                            <input type="hidden" name="delete_review_id" value="<?php echo $review['id']; ?>">
+                        <form action="product-detail.php<?php echo '?id=' . $product_id; ?>" method="POST" > 
+                            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                            <input type="hidden" name="delete_review_id" value="<?php echo $review['review_id']; ?>">
                             <button type="submit" class="button delete-btn" onclick="return confirm('Are you sure you want to delete this review?');">Delete</button>
                         </form>
                     <?php endif; ?>
@@ -212,7 +224,6 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
 
     <?php require './php/footer.php'; ?>
     <script src="./js/cart.js"></script>
-    <script src="./js/shops2.js"></script>
     <script src="./js/app.js"></script>
     <script src="js/quantity.js"></script>
 </body>

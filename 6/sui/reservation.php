@@ -17,6 +17,7 @@ if (!empty($_SESSION['cart'])) {
             $_SESSION['reservations'][$product_id] += $quantity;
         }
 
+
         // Save to the database
         if (isset($_SESSION['username'])) {
             $username = $_SESSION['username'];
