@@ -446,10 +446,7 @@ footer {
 
 
 
-body.disable-scroll {
-    overflow: hidden;
-    /* Disable scrolling when the cart is open */
-}
+
 
 @media screen and (max-width: 960px) {
     .navbar__container {

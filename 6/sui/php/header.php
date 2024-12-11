@@ -1,18 +1,32 @@
 <?php
-// Start the session to manage user login state
+// Start the session only if it hasn't already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// Check if user is an admin
 $isAdmin = false;
 
-
-if(isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id'])) {
     $isAdmin = $_SESSION['role'] === 'admin';
 }
+
+// Set the logo link based on the user role
 $logoLink = $isAdmin ? './manage-products.php' : './index.php';
+
+// Check if this message has already been shown
+if ($isAdmin && !isset($_SESSION['login_alert_shown'])) {
+    echo "<script>
+            alert('You have logged in as admin. Please click the cap icon to manage products.');
+          </script>";
+
+    // Set the flag to ensure the alert only shows once
+    $_SESSION['login_alert_shown'] = true;
+}
+
 echo '<script>var isAdmin = ' . ($isAdmin ? 'true' : 'false') . ';</script>';
 ?>
+
 
 <header>
     <nav class="navbar">

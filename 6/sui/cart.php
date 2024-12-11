@@ -169,6 +169,7 @@ foreach ($cart_products as $product) {
             <div class="cart-summary">
                 <h2>Total Price: ₱<?php echo number_format($total_price, 2); ?></h2>
                 <a href="shop.php" class="checkout-btn">Add More Products</a>
+                <a href="reservation.php" class="proceed-btn">Proceed to Reservation</a>
             </div>
         <?php endif; ?>
     </main>

@@ -73,6 +73,8 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     echo "Invalid product ID.";
     exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -113,67 +115,76 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
 
     <!-- Review Section -->
     <div class="review-section">
-        <h6>Customer Reviews & Rating</h6>
+    <h6>Customer Reviews & Rating</h6>
 
-        <?php
-        $total_rating = 0;
-        $total_reviews = $reviews->num_rows;
+    <?php
+    $total_rating = 0;
+    $total_reviews = $reviews->num_rows;
 
-        if ($total_reviews > 0) {
-            while ($review = $reviews->fetch_assoc()) {
-                $total_rating += $review['rating'];
-            }
-            $average_rating = $total_rating / $total_reviews;
-        } else {
-            $average_rating = 0;
+    if ($total_reviews > 0) {
+        while ($review = $reviews->fetch_assoc()) {
+            $total_rating += $review['rating'];
         }
-        ?>
+        $average_rating = $total_rating / $total_reviews;
+    } else {
+        $average_rating = 0;
+    }
+    ?>
 
-        <div class="average-rating">
-            <span>Average Rating:</span>
-            <div class="rating">
-                <?php for ($i = 1; $i <= 5; $i++) {
-                    echo ($i <= round($average_rating)) ? '<span class="star">&#9733;</span>' : '<span class="star">&#9734;</span>';
-                } ?>
-                <span>(<?php echo number_format($average_rating, 1); ?>)</span>
-            </div>
-        </div>
-
-        <div class="review-form">
-            <form method="POST" action="">
-                <span>Rate this product:</span>
-                <div class="rating-input">
-                    <?php for ($i = 5; $i >= 1; $i--): ?>
-                        <input type="radio" id="star<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" required>
-                        <label for="star<?php echo $i; ?>">★</label>
-                    <?php endfor; ?>
-                </div>
-                <textarea name="comment" placeholder="Leave your comment here..." rows="4" required></textarea>
-                <button type="submit" class="button submit-comment">Submit Comment</button>
-            </form>
-        </div>
-
-        <div class="review-comments">
-            <?php if ($reviews->num_rows > 0): ?>
-                <?php
-                $reviews->data_seek(0);
-                while ($review = $reviews->fetch_assoc()): ?>
-                    <div class="review">
-                        <strong><?php echo htmlspecialchars($review['name']); ?></strong>
-                        <span class="review-date"> - <?php echo htmlspecialchars($review['date']); ?></span>
-                        <div class="rating">
-                            <?php for ($i = 1; $i <= 5; $i++):
-                                echo $i <= $review['rating'] ? '<span class="star">&#9733;</span>' : '<span class="star">&#9734;</span>';
-                            endfor; ?>
-                        </div>
-                        <p><?php echo htmlspecialchars($review['comment']); ?></p>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No reviews yet. Be the first to leave a review!</p>
-            <?php endif; ?>
+    <div class="average-rating">
+        <span>Average Rating:</span>
+        <div class="rating">
+            <?php for ($i = 1; $i <= 5; $i++) {
+                echo ($i <= round($average_rating)) ? '<span class="star">&#9733;</span>' : '<span class="star">&#9734;</span>';
+            } ?>
+            <span>(<?php echo number_format($average_rating, 1); ?>)</span>
         </div>
     </div>
+
+    <div class="review-form">
+        <form method="POST" action="">
+            <span>Rate this product:</span>
+            <div class="rating-input">
+                <?php for ($i = 5; $i >= 1; $i--): ?>
+                    <input type="radio" id="star<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" required>
+                    <label for="star<?php echo $i; ?>">★</label>
+                <?php endfor; ?>
+            </div>
+            <textarea name="comment" placeholder="Leave your comment here..." rows="4" required></textarea>
+            <button type="submit" class="button submit-comment">Submit Comment</button>
+        </form>
+    </div>
+
+    <div class="review-comments">
+        <?php if ($reviews->num_rows > 0): ?>
+            <?php
+            $reviews->data_seek(0);
+            while ($review = $reviews->fetch_assoc()): ?>
+                <div class="review">
+                    <strong><?php echo htmlspecialchars($review['name']); ?></strong>
+                    <span class="review-date"> - <?php echo htmlspecialchars($review['date']); ?></span>
+                    <div class="rating">
+                        <?php for ($i = 1; $i <= 5; $i++):
+                            echo $i <= $review['rating'] ? '<span class="star">&#9733;</span>' : '<span class="star">&#9734;</span>';
+                        endfor; ?>
+                    </div>
+                    <p><?php echo htmlspecialchars($review['comment']); ?></p>
+
+                    <!-- Delete button for admin -->
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <form method="POST" action="">
+                            <input type="hidden" name="delete_review_id" value="<?php echo $review['id']; ?>">
+                            <button type="submit" class="button delete-btn" onclick="return confirm('Are you sure you want to delete this review?');">Delete</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No reviews yet. Be the first to leave a review!</p>
+        <?php endif; ?>
+    </div>
+</div>
+
 
     <section class="related-products">
     <h3>Related Products</h3>
